@@ -1,0 +1,54 @@
+package com.example.demo.Service;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Entity.User;
+import com.example.demo.Repository.UserRepo;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepo ur;
+	
+	@Override
+	public User saveUser(User user) {
+		//generate unique userId
+		String randomUserId = UUID.randomUUID().toString();
+		user.setUserId(randomUserId);
+		return ur.save(user);
+	}
+
+	@Override
+	public User editUser(User user) {
+		return ur.save(user);
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		return ur.findAll();
+	}
+
+	@Override
+	public String deleteUser(Long userId) {
+		 User u=ur.findById(userId).get();
+		 if(u!=null)
+		 {
+		 ur.delete(u);
+		 return "User deleted Successfully!";
+		 }
+		 return "Some error occured!";
+	}
+
+
+
+	@Override
+	public User findById(Long userId) {
+		return ur.findById(userId).get();
+	}
+
+}
