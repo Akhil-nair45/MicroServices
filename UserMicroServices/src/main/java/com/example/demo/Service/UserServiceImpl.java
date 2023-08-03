@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 		
 		//implement rating service call: Using restTemplate
 		//we can also implement the same we did with the userbyif to fetch the rating in all user we are able too see null in ratings, so we can implement the same thing here to able to see the data
+		
 		return ur.findAll();
 	}
 
